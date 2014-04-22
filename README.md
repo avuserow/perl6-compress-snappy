@@ -1,6 +1,6 @@
 # NAME
 
-Compress::Snappy - (de)compress data in Google's Snappy
+Compress::Snappy - (de)compress data in Google's Snappy compression format
 
 # SYNOPSIS
 
