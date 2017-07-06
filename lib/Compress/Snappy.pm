@@ -43,7 +43,7 @@ our sub validate(Blob $blob) returns Bool {
 	return $status == 0;
 }
 
-our proto compress($) {*};
+our proto compress($, |) {*};
 multi compress(Blob $blob) returns Buf {
 	my size_t $max-size = snappy_max_compressed_length($blob.bytes);
 
@@ -61,11 +61,11 @@ multi compress(Blob $blob) returns Buf {
 	return Buf.new: map {$output[$_]}, ^$max-size;
 }
 
-multi compress(Str $str) returns Buf {
-	return compress($str.encode("utf8"));
+multi compress(Str $str, Str $encoding = 'utf-8') returns Buf {
+	return compress($str.encode($encoding));
 }
 
-our sub decompress(Blob $blob) returns Buf {
+our sub decompress(Blob $blob, Str $encoding = Str) {
 	# Allocate an int pointer to store the length
 	my size_t $uncompressed-length;
 	my $compressed = _copy_blob_to_array($blob);
@@ -82,5 +82,7 @@ our sub decompress(Blob $blob) returns Buf {
 		die "snappy_uncompress internal error: $status2";
 	}
 
-	return Buf.new: map {$uncompressed[$_]}, ^$uncompressed-length;
+        my $buf = Buf.new: map {$uncompressed[$_]}, ^$uncompressed-length;
+
+        return $encoding.defined ?? $buf.decode($encoding) !! $buf;
 }
