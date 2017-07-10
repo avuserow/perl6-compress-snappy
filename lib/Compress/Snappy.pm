@@ -47,7 +47,7 @@ multi compress(Str $str, Str $encoding = 'utf-8') returns Buf {
 	return compress($str.encode($encoding));
 }
 
-our sub decompress(Blob $blob, Str $encoding = Str) {
+our sub decompress(Blob $blob, Str $encoding?) {
 	# Allocate an int pointer to store the length
 	my size_t $uncompressed-length;
 
