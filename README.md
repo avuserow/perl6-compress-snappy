@@ -2,6 +2,15 @@
 
 Compress::Snappy - (de)compress data in Google's Snappy compression format
 
+# INSTALLATION
+
+`libsnappy-dev` or equivalent needs to be installed for this to
+work. Issue 
+
+    sudo apt-get install libsnappy-dev
+    
+or equivalent order in other operatins systems or distros to do so.
+
 # SYNOPSIS
 
 ```perl6
