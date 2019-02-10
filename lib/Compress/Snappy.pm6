@@ -1,5 +1,5 @@
-unit module Compress::Snappy;
 use v6;
+unit module Compress::Snappy;
 
 use NativeCall;
 
