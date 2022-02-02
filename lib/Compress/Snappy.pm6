@@ -3,7 +3,7 @@ unit module Compress::Snappy;
 
 use NativeCall;
 
-my constant libsnappy = 'snappy';
+my constant libsnappy = 'snappy', v1;
 constant SNAPPY_OK = 0;
 constant SNAPPY_INVALID_INPUT = 1;
 constant SNAPPY_BUFFER_TOO_SMALL = 2;
